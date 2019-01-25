@@ -1,15 +1,16 @@
 package com.denisgasparoto.restapi.petstore.entity;
 
-import javax.persistence.*;
+import com.denisgasparoto.restapi.petstore.base.BaseEntity;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 @Entity
-public class Service {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+public class Service extends BaseEntity {
 
     @Column(length = 500, nullable = false)
     private String observation;
@@ -17,9 +18,8 @@ public class Service {
     @Column(nullable = false)
     private LocalDateTime dateHour;
 
-    @Enumerated(EnumType.ORDINAL)
     @Column(nullable = false)
-    private ServiceType serviceType;
+    private int serviceType;
 
     @Column(nullable = false)
     private BigDecimal value;
@@ -27,14 +27,6 @@ public class Service {
     @ManyToOne
     @JoinColumn(name = "pet_id", nullable = false)
     private Pet pet;
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     public String getObservation() {
         return observation;
@@ -53,11 +45,11 @@ public class Service {
     }
 
     public ServiceType getServiceType() {
-        return serviceType;
+        return ServiceType.valueOf(serviceType);
     }
 
     public void setServiceType(ServiceType serviceType) {
-        this.serviceType = serviceType;
+        this.serviceType = serviceType.getId();
     }
 
     public BigDecimal getValue() {

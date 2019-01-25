@@ -1,14 +1,13 @@
 package com.denisgasparoto.restapi.petstore.entity;
 
+import com.denisgasparoto.restapi.petstore.base.BaseEntity;
+
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.List;
 
 @Entity
-public class Pet {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+public class Pet extends BaseEntity {
 
     @Column(length = 30, nullable = false)
     private String name;
@@ -21,16 +20,11 @@ public class Pet {
     private Customer customer;
 
     @ManyToOne
-    @JoinColumn(name = "specie_id", nullable = false)
+    @JoinColumn(name = "specie", nullable = false)
     private Specie specie;
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
+    @OneToMany(mappedBy = "pet")
+    private List<Service> services;
 
     public String getName() {
         return name;
@@ -62,5 +56,13 @@ public class Pet {
 
     public void setSpecie(Specie specie) {
         this.specie = specie;
+    }
+
+    public List<Service> getServices() {
+        return services;
+    }
+
+    public void setServices(List<Service> services) {
+        this.services = services;
     }
 }

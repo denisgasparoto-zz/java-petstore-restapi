@@ -1,24 +1,20 @@
 package com.denisgasparoto.restapi.petstore.entity;
 
-import javax.persistence.*;
+import com.denisgasparoto.restapi.petstore.base.BaseEntity;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.OneToMany;
+import java.util.List;
 
 @Entity
-public class Customer {
+public class Customer extends BaseEntity {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
-    @Column(length = 100)
+    @Column(length = 100, nullable = false)
     private String name;
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
+    @OneToMany(mappedBy = "customer")
+    private List<Pet> pets;
 
     public String getName() {
         return name;
@@ -26,5 +22,13 @@ public class Customer {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public List<Pet> getPets() {
+        return pets;
+    }
+
+    public void setPets(List<Pet> pets) {
+        this.pets = pets;
     }
 }
