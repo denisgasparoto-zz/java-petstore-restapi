@@ -6,11 +6,11 @@
     * **Spring Boot:** 2.1.2
     * **Database:** H2 database - http://localhost:8080/h2
     * **Unit Tests:** Mockito + JUnit
-    * **Swagger**: [petstore.yaml](etc/petstore.yaml)
-    * **Postman**: [PetStore.postman_collection.json](etc/PetStore.postman_collection.json)
+    * **Swagger**: [petstore.yaml](artefacts/petstore.yaml)
+    * **Postman**: [PetStore.postman_collection.json](artefacts/PetStore.postman_collection.json)
     
   * ### Modeling
-    ![modelagem](etc/modelagem.png)
+    ![modelagem](artefacts/modelagem.png)
 
   * ### Representations
 
