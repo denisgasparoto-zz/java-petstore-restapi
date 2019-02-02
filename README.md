@@ -1,10 +1,10 @@
 ## Pet Store Spring REST API
 
   * ### Technical Specifications
-    * **Programming Language:** Java - jdk1.8.0_152 ou superior
+    * **Programming Language:** Java | jdk1.8.0_152 (or higher)
     * **Dependency Manager:** apache-maven-3.6.0
     * **Spring Boot:** 2.1.2
-    * **Database:** H2 database - http://localhost:8080/h2
+    * **Database:** H2 database | http://localhost:8080/h2
     * **Unit Tests:** Mockito + JUnit
     * **Swagger**: [petstore.yaml](artefacts/petstore.yaml)
     * **Postman**: [PetStore.postman_collection.json](artefacts/PetStore.postman_collection.json)
@@ -14,7 +14,7 @@
 
   * ### Representations
 
-      All the input and output models are represented in JSON format.
+      All the input and output models are represented in JSON format
 
       * **Customer**
 
