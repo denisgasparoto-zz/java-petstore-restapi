@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 ## Pet Store Spring REST API
 
 * ## Projeto
@@ -10,6 +11,13 @@
     * **Swagger**: [petstore.yaml](etc/petstore.yaml)
     * **Postman**: [PetStore.postman_collection.json](etc/PetStore.postman_collection.json)
 
+=======
+## PetStore Spring REST API
+
+```
+
+```
+>>>>>>> 18463ed6365d77bbe08cc4ac6bd141a6a8b13b33
   * ### Modelagem
     ![modelagem](etc/modelagem.png)
 
