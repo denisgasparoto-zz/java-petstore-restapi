@@ -9,13 +9,13 @@ import javax.persistence.Entity;
 public class Specie extends BaseEntity {
 
     @Column(length = 50, nullable = false)
-    private String description;
+    private String name;
 
-    public String getDescription() {
-        return description;
+    public String getName() {
+        return name;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setName(String name) {
+        this.name = name;
     }
 }

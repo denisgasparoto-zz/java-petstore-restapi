@@ -38,8 +38,8 @@ public class DataInitializer implements CommandLineRunner {
         Specie specie1 = new Specie();
         Specie specie2 = new Specie();
 
-        specie1.setDescription("Dog");
-        specie2.setDescription("Cat");
+        specie1.setName("Dog");
+        specie2.setName("Cat");
 
         specieBusiness.save(specie1);
         specieBusiness.save(specie2);

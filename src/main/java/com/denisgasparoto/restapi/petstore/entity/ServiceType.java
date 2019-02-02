@@ -8,6 +8,7 @@ public enum ServiceType {
     SURGERY(4, "Cirurgia");
 
     private int id;
+
     private String description;
 
     ServiceType(int id,
