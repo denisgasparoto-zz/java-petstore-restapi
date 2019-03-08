@@ -76,7 +76,7 @@ public class PetControllerTest {
     }
 
     @Test
-    public void validaSave() throws Exception {
+    public void checkSave() throws Exception {
         CustomerResponseDTO customer = new CustomerResponseDTO();
         customer.setId(1L);
         customer.setName("John");
@@ -86,7 +86,6 @@ public class PetControllerTest {
         specie.setName("Cachorro");
 
         PetResponseDTO petResponse = new PetResponseDTO();
-        petResponse = new PetResponseDTO();
         petResponse.setId(1L);
         petResponse.setName("Nina");
         petResponse.setBirthDate(LocalDate.parse("2018-01-01"));
@@ -95,16 +94,17 @@ public class PetControllerTest {
 
         Mockito.when(petService.save(Mockito.eq(null), Mockito.any())).thenReturn(petResponse);
 
-        mvc.perform(post("/api/v1/pets").contentType(APPLICATION_JSON).content("{ \"name\": \"Nina\"                 ,"
-                + "  \"birthDate\": \"01/01/2018\" ,"
-                + "  \"idCustomer\": \"1\"               ,"
-                + "  \"idSpecie\": \"1\" }"))
+        mvc.perform(post("/api/v1/pets").contentType(APPLICATION_JSON)
+                .content("{ \"name\": \"Nina\"                 ,"
+                        + "  \"birthDate\": \"01/01/2018\" ,"
+                        + "  \"customerId\": \"1\"               ,"
+                        + "  \"specieId\": \"1\" }"))
                 .andExpect(status().isCreated())
                 .andExpect(jsonPath("$").doesNotExist());
     }
 
     @Test
-    public void validaFindAll() throws Exception {
+    public void checkFindAll() throws Exception {
         Mockito.when(petService.findAll()).thenReturn(pets);
 
         mvc.perform(get("/api/v1/pets").contentType(APPLICATION_JSON))
@@ -127,7 +127,7 @@ public class PetControllerTest {
     }
 
     @Test
-    public void validaFindById() throws Exception {
+    public void checkFindById() throws Exception {
         Mockito.when(petService.findById(pet1.getId())).thenReturn(pet1);
 
         mvc.perform(get("/api/v1/pets/" + pet1.getId()).contentType(APPLICATION_JSON))
@@ -142,7 +142,7 @@ public class PetControllerTest {
     }
 
     @Test
-    public void validaFindServices() throws Exception {
+    public void checkFindServices() throws Exception {
         ServiceResponseDTO service1 = new ServiceResponseDTO();
         service1.setId(1L);
         service1.setObservation("Teste");
@@ -155,16 +155,16 @@ public class PetControllerTest {
 
         Mockito.when(serviceService.findByPet_Id(service1.getId())).thenReturn(servicesPet1);
 
-        mvc.perform(get("/api/v1/pets/" + pet1.getId() + "/services").contentType(APPLICATION_JSON))
+        mvc.perform(get("/api/v1/pets/" + pet1.getId() + "/services")
+                .contentType(APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$", hasSize(servicesPet1.size())))
                 .andExpect(jsonPath("$[0].id", equalTo(service1.getId().intValue())))
-                .andExpect(jsonPath("$[0].observacao", equalTo(service1.getObservation())))
-                //TODO implements getDateHour()
-                .andExpect(jsonPath("$[0].dataHora", equalTo(service1.getDateHour()
+                .andExpect(jsonPath("$[0].observation", equalTo(service1.getObservation())))
+                .andExpect(jsonPath("$[0].dateHour", equalTo(service1.getDateHour()
                         .format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss")))))
-                .andExpect(jsonPath("$[0].tipoService", equalTo(service1.getServiceType())))
-                .andExpect(jsonPath("$[0].valor", equalTo(service1.getValue().intValue())))
+                .andExpect(jsonPath("$[0].serviceType", equalTo(service1.getServiceType())))
+                .andExpect(jsonPath("$[0].value", equalTo(service1.getValue().intValue())))
                 .andExpect(jsonPath("$[0].pet.id", equalTo(service1.getPetResponseDTO().getId().intValue())))
                 .andExpect(jsonPath("$[0].pet.name", equalTo(service1.getPetResponseDTO().getName())))
                 .andExpect(jsonPath("$[0].pet.birthDate", equalTo(service1.getPetResponseDTO().getBirthDate().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")))))
@@ -175,18 +175,21 @@ public class PetControllerTest {
     }
 
     @Test
-    public void validaSaveById() throws Exception {
-        mvc.perform(put("/api/v1/pets/" + pet1.getId()).contentType(APPLICATION_JSON).content("{ \"name\": \"Bidu\"                 ,"
-                + "  \"birthDate\": \"01/01/2018\" ,"
-                + "  \"idCustomer\": \"1\"               ,"
-                + "  \"idSpecie\": \"1\" }"))
+    public void checkSaveById() throws Exception {
+        mvc.perform(put("/api/v1/pets/" + pet1.getId())
+                .contentType(APPLICATION_JSON)
+                .content("{ \"name\": \"Bidu\"                 ,"
+                        + "  \"birthDate\": \"01/01/2018\" ,"
+                        + "  \"customerId\": \"1\"               ,"
+                        + "  \"specieId\": \"1\" }"))
                 .andExpect(status().isNoContent())
                 .andExpect(jsonPath("$").doesNotExist());
     }
 
     @Test
-    public void validaDeleteById() throws Exception {
-        mvc.perform(delete("/api/v1/pets/" + pet1.getId()).contentType(APPLICATION_JSON))
+    public void checkDeleteById() throws Exception {
+        mvc.perform(delete("/api/v1/pets/" + pet1.getId())
+                .contentType(APPLICATION_JSON))
                 .andExpect(status().isNoContent())
                 .andExpect(jsonPath("$").doesNotExist());
     }

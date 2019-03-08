@@ -111,7 +111,7 @@ public class ServiceControllerTest {
         mvc.perform(post("/api/v1/services").contentType(APPLICATION_JSON).content("{ \"observation\": \"Teste 2\" ,"
                 + "  \"idServiceType\": \"4\" 	  ,"
                 + "  \"value\": \"100\"          ,"
-                + "  \"idPet\": \"1\" }"))
+                + "  \"petId\": \"1\" }"))
                 .andExpect(status().isCreated())
                 .andExpect(jsonPath("$").doesNotExist());
     }
@@ -174,7 +174,7 @@ public class ServiceControllerTest {
         mvc.perform(put("/api/v1/services/" + service1.getId()).contentType(APPLICATION_JSON).content("{ \"observation\": \"Teste 2\" ,"
                 + "  \"idServiceType\": \"4\" 	 ,"
                 + "  \"value\": \"100\"          ,"
-                + "  \"idPet\": \"1\" }"))
+                + "  \"petId\": \"1\" }"))
                 .andExpect(status().isNoContent())
                 .andExpect(jsonPath("$").doesNotExist());
     }
@@ -190,7 +190,7 @@ public class ServiceControllerTest {
     public void checkFindByDate() throws Exception {
         Mockito.when(serviceService.findByDateHourBetween(Mockito.eq(LocalDate.parse("2019-01-01")), Mockito.eq(LocalDate.parse("2019-02-01")))).thenReturn(services);
 
-        mvc.perform(get("/api/v1/services/buscaPorData?dataInicial=01/01/2019&dataFinal=01/02/2019").contentType(APPLICATION_JSON))
+        mvc.perform(get("/api/v1/services/findByDate?initialDate=01/01/2019&finalDate=01/02/2019").contentType(APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$", hasSize(services.size())))
                 .andExpect(jsonPath("$[0].id", equalTo(service1.getId().intValue())))

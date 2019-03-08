@@ -87,13 +87,13 @@ public class CustomerIntegrationTest {
                 .then()
                 .statusCode(HttpStatus.BAD_REQUEST.value())
                 .body("errors.size()", Matchers.is(1))
-                .body("errors[0]", Matchers.equalTo("nome: Nome é de preenchimento obrigatório."));
+                .body("errors[0]", Matchers.equalTo("name: O preenchimento do Nome é obrigatório"));
     }
 
     @Test
     public void returnErrorWhenCreateCustomerWithNameLimitExceding() {
         CustomerRequestDTO customer = new CustomerRequestDTO();
-        customer.setName("Testando criação de customer com nome excedendo limite máximo de 100 caracteres definido no CustomerRequestDTO");
+        customer.setName("Testando criação de cliente com nome excedendo limite máximo de 100 caracteres definido no CustomerRequestDTO");
 
         given()
                 .port(port)
@@ -103,7 +103,7 @@ public class CustomerIntegrationTest {
                 .then()
                 .statusCode(HttpStatus.BAD_REQUEST.value())
                 .body("errors.size()", Matchers.is(1))
-                .body("errors[0]", Matchers.equalTo("nome: Nome não pode ultrapassar 100 caracteres."));
+                .body("errors[0]", Matchers.equalTo("name: Limite de caracteres (100) atingido."));
     }
 
     @Test
@@ -169,7 +169,7 @@ public class CustomerIntegrationTest {
                 .then()
                 .statusCode(HttpStatus.NOT_FOUND.value())
                 .body("errors.size()", Matchers.is(1))
-                .body("errors[0]", Matchers.equalTo("Customer 1 não encontrado!"));
+                .body("errors[0]", Matchers.equalTo("Cliente 1 não encontrado!"));
     }
 
     @Test
@@ -255,7 +255,7 @@ public class CustomerIntegrationTest {
                 .then()
                 .statusCode(HttpStatus.NOT_FOUND.value())
                 .body("errors.size()", Matchers.is(1))
-                .body("errors[0]", Matchers.equalTo("Customer 1 não encontrado!"));
+                .body("errors[0]", Matchers.equalTo("Cliente 1 não encontrado!"));
     }
 
     @Test
@@ -330,7 +330,7 @@ public class CustomerIntegrationTest {
                 .then()
                 .statusCode(HttpStatus.BAD_REQUEST.value())
                 .body("errors.size()", Matchers.is(1))
-                .body("errors[0]", Matchers.equalTo(String.format("Customer %d não pode ser excluído pois possui Pets!", customerResponse.getId())));
+                .body("errors[0]", Matchers.equalTo(String.format("Cliente %d não pode ser excluído pois possui Pets!", customerResponse.getId())));
     }
 
     @Test

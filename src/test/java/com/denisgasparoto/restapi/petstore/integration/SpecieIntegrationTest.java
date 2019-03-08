@@ -87,7 +87,7 @@ public class SpecieIntegrationTest {
                 .then()
                 .statusCode(HttpStatus.BAD_REQUEST.value())
                 .body("errors.size()", Matchers.is(1))
-                .body("errors[0]", Matchers.equalTo("nome: Nome é de preenchimento obrigatório."));
+                .body("errors[0]", Matchers.equalTo("name: O preenchimento do nome é obrigatório."));
     }
 
     @Test
@@ -103,7 +103,7 @@ public class SpecieIntegrationTest {
                 .then()
                 .statusCode(HttpStatus.BAD_REQUEST.value())
                 .body("errors.size()", Matchers.is(1))
-                .body("errors[0]", Matchers.equalTo("nome: Nome não pode ultrapassar 100 caracteres."));
+                .body("errors[0]", Matchers.equalTo("name: Limite de caracteres (100) atingido."));
     }
 
     @Test
@@ -169,7 +169,7 @@ public class SpecieIntegrationTest {
                 .then()
                 .statusCode(HttpStatus.NOT_FOUND.value())
                 .body("errors.size()", Matchers.is(1))
-                .body("errors[0]", Matchers.equalTo("Espécie 1 não encontrada!"));
+                .body("errors[0]", Matchers.equalTo("Espécie 1 não encontrada"));
     }
 
     @Test
@@ -255,7 +255,7 @@ public class SpecieIntegrationTest {
                 .then()
                 .statusCode(HttpStatus.NOT_FOUND.value())
                 .body("errors.size()", Matchers.is(1))
-                .body("errors[0]", Matchers.equalTo("Espécie 1 não encontrada!"));
+                .body("errors[0]", Matchers.equalTo("Espécie 1 não encontrada"));
     }
 
     @Test

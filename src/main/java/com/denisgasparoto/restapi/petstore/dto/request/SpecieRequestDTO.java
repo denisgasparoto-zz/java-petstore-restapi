@@ -5,7 +5,7 @@ import javax.validation.constraints.Size;
 
 public class SpecieRequestDTO {
 
-    @NotNull(message = "O preenchimento da descrição é obrigatório.")
+    @NotNull(message = "O preenchimento do nome é obrigatório.")
     @Size(max = 100, message = "Limite de caracteres (100) atingido.")
     private String name;
 

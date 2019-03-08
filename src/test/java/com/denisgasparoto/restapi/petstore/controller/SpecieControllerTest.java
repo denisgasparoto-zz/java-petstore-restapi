@@ -65,7 +65,7 @@ public class SpecieControllerTest {
 
         Mockito.when(specieService.save(Mockito.eq(null), Mockito.any())).thenReturn(specieResponse);
 
-        mvc.perform(post("/api/v1/species").contentType(APPLICATION_JSON).content("{ \"description\": \"Coelho\" }"))
+        mvc.perform(post("/api/v1/species").contentType(APPLICATION_JSON).content("{ \"name\": \"Coelho\" }"))
                 .andExpect(status().isCreated())
                 .andExpect(jsonPath("$").doesNotExist());
     }
@@ -78,9 +78,9 @@ public class SpecieControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$", hasSize(species.size())))
                 .andExpect(jsonPath("$[0].id", equalTo(specie1.getId().intValue())))
-                .andExpect(jsonPath("$[0].description", equalTo(specie1.getName())))
+                .andExpect(jsonPath("$[0].name", equalTo(specie1.getName())))
                 .andExpect(jsonPath("$[1].id", equalTo(specie2.getId().intValue())))
-                .andExpect(jsonPath("$[1].description", equalTo(specie2.getName())));
+                .andExpect(jsonPath("$[1].name", equalTo(specie2.getName())));
     }
 
     @Test
@@ -90,7 +90,7 @@ public class SpecieControllerTest {
         mvc.perform(get("/api/v1/species/" + specie1.getId()).contentType(APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.id", equalTo(specie1.getId().intValue())))
-                .andExpect(jsonPath("$.description", equalTo(specie1.getName())));
+                .andExpect(jsonPath("$.name", equalTo(specie1.getName())));
     }
 
     @Test
@@ -120,13 +120,13 @@ public class SpecieControllerTest {
                 .andExpect(jsonPath("$[0].customer.id", equalTo(customer.getId().intValue())))
                 .andExpect(jsonPath("$[0].customer.name", equalTo(customer.getName())))
                 .andExpect(jsonPath("$[0].specie.id", equalTo(specie1.getId().intValue())))
-                .andExpect(jsonPath("$[0].specie.description", equalTo(specie1.getName())));
+                .andExpect(jsonPath("$[0].specie.name", equalTo(specie1.getName())));
     }
 
     @Test
     public void checkSaveById() throws Exception {
         mvc.perform(put("/api/v1/species/" + specie1.getId())
-                .contentType(APPLICATION_JSON).content("{ \"description\": \"Peixe\" }"))
+                .contentType(APPLICATION_JSON).content("{ \"name\": \"Peixe\" }"))
                 .andExpect(status().isNoContent())
                 .andExpect(jsonPath("$").doesNotExist());
     }

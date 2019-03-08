@@ -68,7 +68,7 @@ public class CustomerControllerTest {
 
         mvc.perform(post("/api/v1/customers")
                 .contentType(APPLICATION_JSON)
-                .contentType("{\"name\": \"Chad\"}"))
+                .content("{\"name\": \"Chad\"}"))
                 .andExpect(status().isCreated())
                 .andExpect(jsonPath("$").doesNotExist());
     }
@@ -97,7 +97,7 @@ public class CustomerControllerTest {
     }
 
     @Test
-    public void validaFindPets() throws Exception {
+    public void checkFindPets() throws Exception {
         SpecieResponseDTO specie = new SpecieResponseDTO();
         specie.setId(1L);
         specie.setName("Cachorro");
